@@ -12,7 +12,7 @@
 
 The CPC benchmark is licensed under **CC BY 4.0**. Users are free to use, modify, and distribute the benchmark, including for commercial purposes, **provided that the original paper is properly cited**:
 
-[Your paper citation here]
+[Your paper citation here] comming soon
 
 ## Description
 
