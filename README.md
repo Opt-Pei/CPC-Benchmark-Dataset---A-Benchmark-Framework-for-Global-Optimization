@@ -14,7 +14,9 @@ The CPC benchmark is licensed under **CC BY 4.0**. Users are free to use, modify
 
 The CPC Framework is currently under development.
 If you use this benchmark set, please cite it as:
+
 Peicong Cheng, Makoto Yamashita, “CPC Framework – A Benchmark Framework for Global Optimization”, August 2025, GitHub Repository: github.com/Opt-Pei/CPC-framework.
+
 A formal citation will be provided upon publication.
 
 ## Description
