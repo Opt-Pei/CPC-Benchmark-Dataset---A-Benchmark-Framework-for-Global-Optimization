@@ -1,0 +1,5 @@
+NewCodeBlock "Case-14";
+ParameterDomain = [-10,10];
+Algorithm = SM2;
+MultiRun = 10;
+MinFunction (1.5-x1+x1*x2)^0.2+(2.5-x1+x1*x2^2)^(x1-0.5)+(2.625-x1+x1*x2^3)^0.2;

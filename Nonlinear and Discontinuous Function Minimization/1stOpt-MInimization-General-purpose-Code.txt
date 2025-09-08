@@ -1,0 +1,19 @@
+NewCodeBlock "Case-?";  //Begin of your 1stOpt code
+
+//Hardness = 2; //in default, Hardness = 1; when the problem is difficult, increasing the value of "Hardness", the calculation time increases correspondingly
+
+Algorithm = DE1; //Algorithm selection. 
+//Algorithm = SM2; //Algorithm selection.
+//Algorithm = UGO1; //Algorithm selection.
+//Algorithm = RGO1; // Normally, these four algorithms have the best performance. 
+
+MultiRun = 10; //Numbers of run, adjust with your preference
+
+
+ParameterDomain = [-100,100]; //Domain of independent variables (same)
+
+//Parameter x1=[-10,10], x2=[-50,50]; // Domain of independent variables (different)
+
+MinFunction ?? ; //You objective function
+
+//e.g. MinFunction 1-ln((x1^2-x2^2+0.25)^0.5-(0.3*cos(3*pi*x1-x2+1)*cos(4*pi*x2+2*x1-1)-0.29)^0.5);

@@ -1,0 +1,5 @@
+NewCodeBlock "Case-8"
+Algorithm = RGO1;
+MultiRun = 10;
+ParameterDomain = [0,14];
+MinFunction (1-((sin(pi*(x1-2))*sin(pi*(x2-2)))/(pi^2*x1*(x1-2)*(x2-2)))^1.03)+(2+(x1-7)^2-2*(x2-7)^2)^0.65;

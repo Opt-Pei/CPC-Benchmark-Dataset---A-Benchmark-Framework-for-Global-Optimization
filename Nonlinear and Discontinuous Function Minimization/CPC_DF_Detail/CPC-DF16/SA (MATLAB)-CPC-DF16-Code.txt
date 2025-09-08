@@ -1,0 +1,107 @@
+format long g;
+
+% Test Function 16
+
+function fval = obj_function(x)
+   sqrtbase1 = x(4)-4.*x(5)-27;
+   if sqrtbase1 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase2 = x(5)-x(4)./2+27;
+   if sqrtbase2 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase3 = x(3)-3.*x(4)-27;
+   if sqrtbase3 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase4 = x(4)-x(3)./2+27;
+   if sqrtbase4 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase5 = x(2)-2.*x(3)-27;
+   if sqrtbase5 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase6 = x(3)-x(2)./2+27;
+   if sqrtbase6 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase7 = x(1)-1.*x(2)-27;
+   if sqrtbase7 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase8 = x(2)-x(1)./2+27;
+   if sqrtbase8 < 0
+      fval = 1e100;
+      return;
+   end
+
+   fval = (power((-(1.*x(2)+27).*sin(sqrt(sqrtbase8))+sin(sqrt(sqrtbase7)).*(-x(1))),1.))/(2.*1e+7)+...
+(power((-(2.*x(3)+27).*sin(sqrt(sqrtbase6))+sin(sqrt(sqrtbase5)).*(-x(2))),2.))/(2.*1e+7)+(power((-(3.*...
+x(4)+27).*sin(sqrt(sqrtbase4))+sin(sqrt(sqrtbase3)).*(-x(3))),3.))/(2.*1e+7)+(power((-(4.*x(5)+27).*...
+sin(sqrt(sqrtbase2))+sin(sqrt(sqrtbase1)).*(-x(4))),4.))/(2.*1e+7);
+end
+lb = [-512,-512,-512,-512,-512];
+ub = [512,512,512,512,512];
+PopSz = 2000;
+ParamNo = 5;
+
+
+
+%% SA executive code
+numRuns = 20;
+
+% Initialize arrays to store results
+results_fval = zeros(numRuns, 1);        % Store objective function values
+results_xOpt = zeros(numRuns, ParamNo);  % Store optimized variable values
+
+% Set random seed (ensure different initial populations for each run)
+rng('shuffle');
+
+options = optimoptions('simulannealbnd', 'Display', 'Iter', 'MaxIterations', 2000);
+best = 1E+100;
+
+% Perform multiple SA optimizations
+for i = 1:numRuns
+    fprintf('Run #%d...\n', i);
+    
+    % Run SA
+    x0 = lb + (ub - lb) .* rand(size(lb));
+    [xOpt, fval] = simulannealbnd(@obj_function, x0, lb, ub, options);
+
+    % Store results
+    results_fval(i) = fval;
+    results_xOpt(i, :) = xOpt;
+    if best > fval
+        best = fval;
+        best_xOpt = xOpt;
+    end
+    % Print current run results
+    fprintf('Run %d: Objective Function (Min.): %f\n', i, fval);
+    fprintf('Optimized variable values: %s\n', mat2str(xOpt));
+end
+
+disp(best);
+disp(best_xOpt);
+
+% Output all results
+disp('Objective function values of all runs:');
+disp(results_fval);
+
+disp('Optimized variable values of all runs:');
+disp(results_xOpt);

@@ -1,0 +1,8 @@
+NewCodeBlock "Case-21";
+Hardness = 2;
+Constant n=5;
+Algorithm = DE1;
+MultiRun = 10;
+Parameter x(n);
+ParameterDomain = [-30,30];
+MinFunction Sum(i=1:n-1)(-ln(sin(x[i+1])^2-sin(x[i])^2+0.02)+(x[i]-0.25)^0.15)-ln(x[n]);

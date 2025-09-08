@@ -1,0 +1,6 @@
+NewCodeBlock "Case-23";
+Algorithm = SM2[150,50,0.1];
+MultiRun = 10;
+Constant n = 5;//20;
+Parameters x(1:n)=[-50,50];
+MinFunction -20*exp(-0.2*sqrt(1/n*sum(i=1:n-1)(x[i]^2/i-x[i+1]^i)))-ln(1/n*sum(i=1:n-1)(sin(sqrt(cos(i*(x[i]))-sin(i*x[i+1])))));//+a+exp(1);

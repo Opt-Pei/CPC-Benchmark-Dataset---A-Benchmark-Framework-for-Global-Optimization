@@ -1,0 +1,131 @@
+format long g;
+
+
+% Test Function 12
+function fval = obj_function(x)
+   powbase1 = (10.*((power(x(5),2))+(power(x(4),2)))-0.85);
+   if powbase1 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase1 = (power(x(5),2))-(power(x(4),2));
+   if sqrtbase1 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase2 = sin(sqrt(sqrtbase1)-0.5)-0.5;
+   if sqrtbase2 < 0
+      fval = 1e100;
+      return;
+   end
+
+   powbase2 = (10.*((power(x(4),2))+(power(x(3),2)))-0.85);
+   if powbase2 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase3 = (power(x(4),2))-(power(x(3),2));
+   if sqrtbase3 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase4 = sin(sqrt(sqrtbase3)-0.5)-0.5;
+   if sqrtbase4 < 0
+      fval = 1e100;
+      return;
+   end
+
+   powbase3 = (10.*((power(x(3),2))+(power(x(2),2)))-0.85);
+   if powbase3 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase5 = (power(x(3),2))-(power(x(2),2));
+   if sqrtbase5 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase6 = sin(sqrt(sqrtbase5)-0.5)-0.5;
+   if sqrtbase6 < 0
+      fval = 1e100;
+      return;
+   end
+
+   powbase4 = (10.*((power(x(2),2))+(power(x(1),2)))-0.85);
+   if powbase4 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase7 = (power(x(2),2))-(power(x(1),2));
+   if sqrtbase7 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase8 = sin(sqrt(sqrtbase7)-0.5)-0.5;
+   if sqrtbase8 < 0
+      fval = 1e100;
+      return;
+   end
+
+   fval = -((sqrt(sqrtbase8)./(power(powbase4,0.2))+0.5)+sqrt(sqrtbase6)./(power(powbase3,0.2))+0.5+...
+sqrt(sqrtbase4)./(power(powbase2,0.2))+0.5+sqrt(sqrtbase2)./(power(powbase1,0.2))+0.5);
+end
+lb = [-100,-100,-100,-100,-100];
+ub = [100,100,100,100,100];
+PopSz = 2000;
+ParamNo = 5;
+
+
+
+
+
+%% SA executive code
+numRuns = 20;
+
+% Initialize arrays to store results
+results_fval = zeros(numRuns, 1);        % Store objective function values
+results_xOpt = zeros(numRuns, ParamNo);  % Store optimized variable values
+
+% Set random seed (ensure different initial populations for each run)
+rng('shuffle');
+
+options = optimoptions('simulannealbnd', 'Display', 'Iter', 'MaxIterations', 2000);
+best = 1E+100;
+
+% Perform multiple SA optimizations
+for i = 1:numRuns
+    fprintf('Run #%d...\n', i);
+    
+    % Run SA
+    x0 = lb + (ub - lb) .* rand(size(lb));
+    [xOpt, fval] = simulannealbnd(@obj_function, x0, lb, ub, options);
+
+    % Store results
+    results_fval(i) = fval;
+    results_xOpt(i, :) = xOpt;
+    if best > fval
+        best = fval;
+        best_xOpt = xOpt;
+    end
+    % Print current run results
+    fprintf('Run %d: Objective Function (Min.): %f\n', i, fval);
+    fprintf('Optimized variable values: %s\n', mat2str(xOpt));
+end
+
+disp(best);
+disp(best_xOpt);
+
+% Output all results
+disp('Objective function values of all runs:');
+disp(results_fval);
+
+disp('Optimized variable values of all runs:');
+disp(results_xOpt);

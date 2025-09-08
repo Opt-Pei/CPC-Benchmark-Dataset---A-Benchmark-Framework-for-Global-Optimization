@@ -1,0 +1,6 @@
+NewCodeBlock "Case-2"; 
+Algorithm = SM2; //DE1
+MultiRun = 10;
+Constant n=5;
+Parameters x(1:n)=[-5,5];
+MinFunction Sum(i=1:n)(sqrt(10*x[i]*sin(x[i])-(10*cos(2*pi*x[i]*(i-1))-8)^0.03));

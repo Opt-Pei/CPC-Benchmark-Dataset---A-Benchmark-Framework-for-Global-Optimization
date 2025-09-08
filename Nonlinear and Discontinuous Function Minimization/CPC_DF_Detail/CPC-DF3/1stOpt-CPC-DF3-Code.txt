@@ -1,0 +1,8 @@
+NewCodeBlock "Case-3";
+Hardness = 2; //1,2,...5
+Algorithm = SM2;
+MultiRun = 10;
+ParameterDomain = [-100,100];
+MinFunction //2/3*x1^3-8*x1^2+33*x1-x1*x2+5+((x1-4)^2+(x2-5)^2-4)^2;
+            -ln(x1-x2*ln(cos(-2/3*x1^3-8*x1^2)))-ln(33*x1-x1*x2+5-((x1-4)^2+(x2-5)^2-4)^2);
+

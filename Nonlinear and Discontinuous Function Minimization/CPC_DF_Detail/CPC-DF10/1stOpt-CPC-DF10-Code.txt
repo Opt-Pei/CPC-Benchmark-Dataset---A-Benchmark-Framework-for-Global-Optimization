@@ -1,0 +1,6 @@
+NewCodeBlock "Case-10";
+Hardness = 2; //1,2,...5
+Algorithm = SM2;
+MultiRun = 10;
+ParameterDomain = [-5,5];
+MinFunction (x1^2+x2^2/x1-5)^0.01+25*((sin(x1+1))^2-(sin(x2-1))^2)^0.25;

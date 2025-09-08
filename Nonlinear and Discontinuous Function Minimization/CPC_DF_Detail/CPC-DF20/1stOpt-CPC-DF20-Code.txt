@@ -1,0 +1,6 @@
+NewCodeBlock "Case-20";
+Constant n=5;
+Algorithm = DE1;
+MultiRun = 10;
+ParameterDomain = [-10,10];
+MinFunction -Sum(i=1:n-1)(sqrt(ln(sin(x[i]*x[i+1]-i)+0.1)+x[i]*(cos(x[i]-i*x[i+1]))^(1/n)));//+10;

@@ -1,0 +1,125 @@
+%% PlatEMO + MATLAB
+
+format long g;
+
+% Test Function 19
+function fval = obj_function(x)
+   powbase1 = (-40+x(3)-x(5));
+   if powbase1 < 0
+      fval = 1e100;
+      return;
+   end
+
+   powbase2 = (-20+x(1)-x(3));
+   if powbase2 < 0
+      fval = 1e100;
+      return;
+   end
+
+   powbase3 = (x(6)+x(5)-x(1));
+   if powbase3 < 0
+      fval = 1e100;
+      return;
+   end
+
+   logbase1 = (power(x(4),2))-(power(50,2));
+   if logbase1 <= 0
+      fval = 1e100;
+      return;
+   end
+
+   logbase2 = x(5).*x(5)-x(6);
+   if logbase2 <= 0
+      fval = 1e100;
+      return;
+   end
+
+   logbase3 = -(power(x(2),2))+(power(x(4),2));
+   if logbase3 <= 0
+      fval = 1e100;
+      return;
+   end
+
+   logbase4 = x(3).*x(3)-x(4);
+   if logbase4 <= 0
+      fval = 1e100;
+      return;
+   end
+
+   powbase4 = ((power(50,2))-(power(x(2),2)));
+   if powbase4 < 0
+      fval = 1e100;
+      return;
+   end
+
+   logbase5 = x(1).*x(1)-x(2);
+   if logbase5 <= 0
+      fval = 1e100;
+      return;
+   end
+
+   fval = (power((-1.29.*log(logbase5)-1.1.*(power(powbase4,0.25))),2))+(power((-1.59.*log(logbase4)-...
+1.2.*log(logbase3)),2))+(power((-1.99.*log(logbase2)-1.3.*log(logbase1)),2))+(power(((power(powbase3,...
+0.1))-x(3)./x(4)),2))+(power(((power(powbase2,0.2))-1.2),2))+(power(((power(powbase1,0.3))-1.3),2));
+end
+lb = [-100,-100,-100,-100,-100,-100];
+ub = [100,100,100,100,100,100];
+PopSz = 2000;
+ParamNo = 6;
+
+
+
+%% GPSO algorithm
+f = @(x) obj_function(x);
+numRuns = 20;
+results = struct('bestObj', [], 'bestDec', []);
+
+% Perform multiple optimization runs
+for run = 1:numRuns
+    fprintf('Run #%d starts\n', run); 
+    rng(run); % Set random seed to ensure different initial values in each run
+    [Dec, Obj, Con] = platemo('objFcn', f, 'D', ParamNo, 'algorithm', @GPSO, ...
+        'lower', lb, 'upper', ub, 'maxFE', 100000, 'N', PopSz, 'run', run); % function from PlatEMO
+
+    % Find the best solution in the current run
+    [bestObjRun, bestIdx] = min(Obj);
+    bestDecRun = Dec(bestIdx, :);
+
+    % Store the results of the current run
+    results(run).bestObj = bestObjRun;
+    results(run).bestDec = bestDecRun;
+    fprintf('Run #%d ends\n', run);
+end
+
+% Find the overall best solution among all runs
+[overallBestObj, overallBestRunIdx] = min([results.bestObj]);
+overallBestDec = results(overallBestRunIdx).bestDec;
+
+% Output results of each run
+disp('Results of each run:');
+for run = 1:numRuns
+    fprintf('Run %d - Best objective value: %.16f\n', run, results(run).bestObj);
+    fprintf('Run %d - Best decision variables: [%s]\n', run, num2str(results(run).bestDec, '%.16f '));
+end
+
+% Output overall best result
+disp('Overall best result:');
+fprintf('Best objective value: %.16f\n', overallBestObj);
+fprintf('Corresponding decision variables: [%s]\n', num2str(overallBestDec, '%.16f '));
+
+% Output results in formatted style
+disp('Final results:');
+fprintf('Objective values:\n');
+for run = 1:numRuns
+    fprintf('%.16f\n', results(run).bestObj); % Print objective values of each run with 16 decimals
+end
+
+fprintf('\nDecision variables:\n');
+for run = 1:numRuns
+    decs = results(run).bestDec;   % Get the best decision variables of the current run
+    fprintf('');                   % Placeholder for line header (customizable if needed)
+    for d = 1:length(decs)
+        fprintf('%.16f ', decs(d)); % Print each variable in order, separated by spaces
+    end
+    fprintf('\n'); % New line
+end

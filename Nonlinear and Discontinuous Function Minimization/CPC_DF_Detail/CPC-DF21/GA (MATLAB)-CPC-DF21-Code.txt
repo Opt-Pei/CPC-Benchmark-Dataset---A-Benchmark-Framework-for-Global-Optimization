@@ -1,0 +1,109 @@
+format long g;
+
+% Test Function 21
+function fval = obj_function(x)
+   logbase1 = x(5);
+   if logbase1 <= 0
+      fval = 1e100;
+      return;
+   end
+
+   powbase1 = (x(4)-0.25);
+   if powbase1 < 0
+      fval = 1e100;
+      return;
+   end
+
+   logbase2 = (power(sin(logbase1),2))-(power(sin(x(4)),2))+0.02;
+   if logbase2 <= 0
+      fval = 1e100;
+      return;
+   end
+
+   powbase2 = (x(3)-0.25);
+   if powbase2 < 0
+      fval = 1e100;
+      return;
+   end
+
+   logbase3 = (power(sin(x(4)),2))-(power(sin(x(3)),2))+0.02;
+   if logbase3 <= 0
+      fval = 1e100;
+      return;
+   end
+
+   powbase3 = (x(2)-0.25);
+   if powbase3 < 0
+      fval = 1e100;
+      return;
+   end
+
+   logbase4 = (power(sin(x(3)),2))-(power(sin(x(2)),2))+0.02;
+   if logbase4 <= 0
+      fval = 1e100;
+      return;
+   end
+
+   powbase4 = (x(1)-0.25);
+   if powbase4 < 0
+      fval = 1e100;
+      return;
+   end
+
+   logbase5 = (power(sin(x(2)),2))-(power(sin(x(1)),2))+0.02;
+   if logbase5 <= 0
+      fval = 1e100;
+      return;
+   end
+
+   fval = (-log(logbase5)+(power(powbase4,0.15)))+(-log(logbase4)+(power(powbase3,0.15)))+(-log(logbase3)+...
+(power(powbase2,0.15)))+(-log(logbase2)+(power(powbase1,0.15)))-log(logbase1);
+end
+lb = [-30,-30,-30,-30,-30];
+ub = [30,30,30,30,30];
+PopSz = 2000;
+ParamNo = 5;
+
+
+
+%% GA executive code
+numRuns = 20;
+
+% Initialize arrays to store results
+results_fval = zeros(numRuns, 1);        % Store objective function values of each run
+results_xOpt = zeros(numRuns, ParamNo);  % Store optimized variable values of each run
+
+% Set random seed (ensure different initial populations for each run)
+rng('shuffle');
+
+options = optimoptions('ga', 'PopulationSize', PopSz, 'MaxGenerations', 2E3, 'Display', 'Iter');
+best = 1E+100;
+
+% Perform multiple GA optimizations
+for i = 1:numRuns
+    fprintf('Run #%d...\n', i);
+    
+    % Run GA
+    [xOpt, fval] = ga(@obj_function, ParamNo, [], [], [], [], lb, ub, [], [], options);
+
+    % Store results
+    results_fval(i) = fval;
+    results_xOpt(i, :) = xOpt;
+    if best > fval
+        best = fval;
+        best_xOpt = xOpt;
+    end
+    % Print current run results
+    fprintf('Run %d: Objective Function (Min.): %f\n', i, fval);
+    fprintf('Optimized variable values: %s\n', mat2str(xOpt));
+end
+
+disp(best);
+disp(best_xOpt);
+
+% Output all results
+disp('Objective function values of all runs:');
+disp(results_fval);
+
+disp('Optimized variable values of all runs:');
+disp(results_xOpt);

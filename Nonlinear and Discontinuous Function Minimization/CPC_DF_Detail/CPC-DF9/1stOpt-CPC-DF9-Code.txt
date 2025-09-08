@@ -1,0 +1,6 @@
+NewCodeBlock "Case-9";
+Hardness = 2; //1,2,...5
+Algorithm = SM2;
+MultiRun = 10;
+ParameterDomain = [-10,10];
+MinFunction (x1^2+x2-10)^(1.02*cos(x1))+(x1+x2^2-7)^(1.02+sin(x2))*(x1^2+x2^3-1)^(1.02+cos(x1*x2));

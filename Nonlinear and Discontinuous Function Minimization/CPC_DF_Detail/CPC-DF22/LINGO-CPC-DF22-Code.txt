@@ -1,0 +1,4 @@
+!Lingo Code - (Case-22);
+min = (x*y-(1/y-@cos(-x+y)/x)^(x-y)-0.01*x)^1.01+((-x-y)^(x/y)-(1/x-x*@log(x+@sin(y*x)*y))+0.02*y)^1.01;
+@BND(-100,x,100);
+@BND(-100,y,100);

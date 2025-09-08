@@ -1,0 +1,6 @@
+!Lingo Code - (Case-25);
+Sets:
+    Par/1..3/:x;
+EndSets
+min = -(((@log(@sqrt(@sin(x(1)-@pi()/2)+@cos(x(2)-@pi()))+0.25*x(1)+1))/(@sqrt(@log(@sin(x(1)*@pi())-(@cos(2*x(1)-x(2)+@pi()/2)-x(1)/1)))+0.1))+(@log(@sqrt(@sin(x(2)-@pi()/2)+@cos(x(3)-@pi()))+0.25*x(2)+1))/(@sqrt(@log(@sin(x(2)*@pi())-(@cos(2*x(2)-x(3)+@pi()/2)-x(2)/2)))+0.1));
+@For(Par: @BND(-10,x,10));

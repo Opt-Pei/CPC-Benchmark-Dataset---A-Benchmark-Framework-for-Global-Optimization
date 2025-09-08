@@ -1,0 +1,6 @@
+NewDivision "Case-7";
+Algorithm = SM2;
+MultiRun = 10;
+Constant n = 3;
+Parameter x(1:n)=[-10,10];
+MinFunction -Sum(i=1:n)(Sum(j=1:5)(ln(0.1-j*sin((j+1)*x[i]^i/j+j))));

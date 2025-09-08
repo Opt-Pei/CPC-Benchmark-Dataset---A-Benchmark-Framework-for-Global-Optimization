@@ -1,0 +1,4 @@
+!Lingo Code - (Case-15);
+min = 10-(0.01-@sqrt(@cos(12*@sqrt(x^y-y^x)+5)-x/y))^1.35+(0.5*(x^2-y^2)*@cos(x-y)+2)^1.5;
+@BND(-5,x,5);
+@BND(-5,y,5);

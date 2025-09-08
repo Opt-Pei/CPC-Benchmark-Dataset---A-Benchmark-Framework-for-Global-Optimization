@@ -1,0 +1,6 @@
+NewCodeBlock "Case-4";//Original Case-4
+Constant n = 5;
+Algorithm = SM2[100];
+MultiRun = 10;
+Parameters x(1:n)=[-512,512];
+MinFunction sum(i=1:n-1)(-(x[i+1]+47)*sin(sqrt((x[i+1]+x[i]/2+47)))+ln(sin(sqrt((x[i]-x[i+1]-47))))*(-x[i]));

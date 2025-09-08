@@ -21,7 +21,36 @@ A formal citation will be provided upon publication.
 
 ## Description
 
-This repository contains the implementation of the CPC benchmark, initially introduced with 25 discontinuous and nonlinear function minimization problems. These problems are designed to test algorithmic performance under conditions of discontinuity, nonlinearity, and sensitivity to numerical precision. 
+This repository contains the implementation of the CPC benchmark, initially introduced with 25 discontinuous and nonlinear function minimization problems. These problems are designed to test algorithmic performance under conditions of discontinuity, nonlinearity, and sensitivity to numerical precision. Detailed descriptions of each function can be found in the overview PDF file located in the corresponding problem folder.
+
+To further facilitate practical use, we also provide general-purpose implmentation codes. These include:
+
+**General-purpose computation scripts**, including reference implementations of well-known algorithms and professional software templates.
+
+Genetic Algorithm (GA) - MATLAB
+
+Simulated Annealing (SA) - MATLAB
+
+A quasi-Newton method proposed by Broyden, Fletcher, Goldfarb, and Shanno (BFGS) + Multi-Start (MS) - MATLAB
+
+Gradient-based Particle Swarm Optimization Algorithm (GPSO) - MATLAB + PlatEMO
+
+Branch & Bound - LINGO
+
+Universial Global Optimization - 1stOpt
+
+These can be used as starting points for running multiple benchmark problems. However, there might be better ways to solve the same problems depending on the chosen method and software platform. The implementations provided here are intended only as references, users are encouraged to adapt or improve them according to their specific requirements.
+
+**Problem-specific scripts**, provided in the corresponding folders of each benchmark problem, which directly implement the formulation and computation of that specific problem.
+
+**General function code**, written in a platform-independent form, so that users working with other optimization platforms can easily adapt the problems to their own environments.
 
 Future extensions of CPC will include additional discontinuous and nonlinear minimization problems, as well as other categories such as equation solving, curve fitting, and black-box optimization. Each problem includes detailed data and the currently known best solutions to facilitate systematic evaluation and fair comparison of optimization algorithms.
+
+## Usage Suggestions
+
+For problems with very low feasible ratios (where finding an initial feasible solution is particularly difficult), a practical approach is to apply a Monte Carlo method to obtain at least one feasibnle solution before executing algorithm. This can significiantly improve the success rate and stability of subsequent optimization runs.
+
+
+
 

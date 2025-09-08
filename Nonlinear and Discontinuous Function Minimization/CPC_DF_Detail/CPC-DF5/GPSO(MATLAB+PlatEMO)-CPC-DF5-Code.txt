@@ -1,0 +1,131 @@
+%% PlatEMO + MATLAB
+
+format long g;
+
+% Test Function 5
+function fval = obj_function(x)
+   sqrtbase1 = 5.*(power(x(5),2))-(power(((power(x(5),2.))/5-10.*cos(2.*pi.*5.*x(5))),(5./5)));
+   if sqrtbase1 < 0
+      fval = 1e100;
+      return;
+   end
+
+   powbase1 = ((power(x(4),2.))/4-10.*cos(2.*pi.*4.*x(4)));
+   if powbase1 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase2 = 4.*(power(x(4),2))-(power(powbase1,(4./5)));
+   if sqrtbase2 < 0
+      fval = 1e100;
+      return;
+   end
+
+   powbase2 = ((power(x(3),2.))/3-10.*cos(2.*pi.*3.*x(3)));
+   if powbase2 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase3 = 3.*(power(x(3),2))-(power(powbase2,(3./5)));
+   if sqrtbase3 < 0
+      fval = 1e100;
+      return;
+   end
+
+   powbase3 = ((power(x(2),2.))/2-10.*cos(2.*pi.*2.*x(2)));
+   if powbase3 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase4 = 2.*(power(x(2),2))-(power(powbase3,(2./5)));
+   if sqrtbase4 < 0
+      fval = 1e100;
+      return;
+   end
+
+   powbase4 = ((power(x(1),2.))/1-10.*cos(2.*pi.*1.*x(1)));
+   if powbase4 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase5 = 1.*(power(x(1),2))-(power(powbase4,(1./5)));
+   if sqrtbase5 < 0
+      fval = 1e100;
+      return;
+   end
+
+   logbase1 = 5-((sqrt(1.*(power(x(1),2))-(power(powbase4,(1./5)))))+sqrt(2.*(power(x(2),2))-(power(powbase3,(2./5))))+sqrt(3.*(power(x(3),2))-(power(powbase2,(3./5))))+sqrt(4.*(power(x(4),2))-(power(powbase1,(4./5))))+sqrt(sqrtbase1))+1;
+   if logbase1 <= 0
+      fval = 1e100;
+      return;
+   end
+
+   fval = -log(logbase1);
+end
+
+lb = [-6,-6,-6,-6,-6];
+ub = [6,6,6,6,6];
+PopSz = 2000;
+ParamNo = 5;
+
+
+
+
+%% GPSO algorithm
+f = @(x) obj_function(x);
+numRuns = 20;
+results = struct('bestObj', [], 'bestDec', []);
+
+% Perform multiple optimization runs
+for run = 1:numRuns
+    fprintf('Run #%d starts\n', run); 
+    rng(run); % Set random seed to ensure different initial values in each run
+    [Dec, Obj, Con] = platemo('objFcn', f, 'D', ParamNo, 'algorithm', @GPSO, ...
+        'lower', lb, 'upper', ub, 'maxFE', 100000, 'N', PopSz, 'run', run); % function from PlatEMO
+
+    % Find the best solution in the current run
+    [bestObjRun, bestIdx] = min(Obj);
+    bestDecRun = Dec(bestIdx, :);
+
+    % Store the results of the current run
+    results(run).bestObj = bestObjRun;
+    results(run).bestDec = bestDecRun;
+    fprintf('Run #%d ends\n', run);
+end
+
+% Find the overall best solution among all runs
+[overallBestObj, overallBestRunIdx] = min([results.bestObj]);
+overallBestDec = results(overallBestRunIdx).bestDec;
+
+% Output results of each run
+disp('Results of each run:');
+for run = 1:numRuns
+    fprintf('Run %d - Best objective value: %.16f\n', run, results(run).bestObj);
+    fprintf('Run %d - Best decision variables: [%s]\n', run, num2str(results(run).bestDec, '%.16f '));
+end
+
+% Output overall best result
+disp('Overall best result:');
+fprintf('Best objective value: %.16f\n', overallBestObj);
+fprintf('Corresponding decision variables: [%s]\n', num2str(overallBestDec, '%.16f '));
+
+% Output results in formatted style
+disp('Final results:');
+fprintf('Objective values:\n');
+for run = 1:numRuns
+    fprintf('%.16f\n', results(run).bestObj); % Print objective values of each run with 16 decimals
+end
+
+fprintf('\nDecision variables:\n');
+for run = 1:numRuns
+    decs = results(run).bestDec;   % Get the best decision variables of the current run
+    fprintf('');                   % Placeholder for line header (customizable if needed)
+    for d = 1:length(decs)
+        fprintf('%.16f ', decs(d)); % Print each variable in order, separated by spaces
+    end
+    fprintf('\n'); % New line
+end

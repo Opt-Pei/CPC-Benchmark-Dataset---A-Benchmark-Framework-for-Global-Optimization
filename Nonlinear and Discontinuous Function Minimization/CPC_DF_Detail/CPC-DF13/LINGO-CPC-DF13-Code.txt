@@ -1,0 +1,6 @@
+!Lingo Code - (Case-13);
+Sets:
+    Par/1..2/:x;
+EndSets
+min = @sqrt(x(1)-2*x(2)^2-@exp(x(2)-x(1)^2))-(0.5*@cos(3*@pi()*x(1)+4*@pi()*x(2)+5)-0.495*x(1))^0.2;
+@For(Par: @BND(-100,x,100));

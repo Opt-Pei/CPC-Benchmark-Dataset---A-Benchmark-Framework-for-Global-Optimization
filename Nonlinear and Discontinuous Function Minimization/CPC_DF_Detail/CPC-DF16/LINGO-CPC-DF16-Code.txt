@@ -1,0 +1,6 @@
+!Lingo Code - (Egg Holder Function - Optimization);
+Sets:
+    Par/1..5/:x;
+EndSets
+min = (-(1*x(2)+27)*@sin(@sqrt(x(2)-x(1)/2+27))+@sin(@sqrt(x(1)-1*x(2)-27))*(-x(1)))^1/(2*1e+7)+(-(2*x(3)+27)*@sin(@sqrt(x(3)-x(2)/2+27))+@sin(@sqrt(x(2)-2*x(3)-27))*(-x(2)))^2/(2*1e+7)+(-(3*x(4)+27)*@sin(@sqrt(x(4)-x(3)/2+27))+@sin(@sqrt(x(3)-3*x(4)-27))*(-x(3)))^3/(2*1e+7)+(-(4*x(5)+27)*@sin(@sqrt(x(5)-x(4)/2+27))+@sin(@sqrt(x(4)-4*x(5)-27))*(-x(4)))^4/(2*1e+7);
+@For(Par: @BND(-512,x,512));

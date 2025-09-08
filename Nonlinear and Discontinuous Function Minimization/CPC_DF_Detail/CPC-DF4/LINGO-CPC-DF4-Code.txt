@@ -1,0 +1,6 @@
+!Lingo Code - (Case-4);
+Sets:
+    Par/1..5/:x;
+EndSets
+min = -(x(2)+47)*@sin(@sqrt(x(2)+x(1)/2+47))+@log(@sin(@sqrt(x(1)-x(2)-47)))*(-x(1))+(-(x(3)+47)*@sin(@sqrt(x(3)+x(2)/2+47))+@log(@sin(@sqrt(x(2)-x(3)-47)))*(-x(2)))+(-(x(4)+47)*@sin(@sqrt(x(4)+x(3)/2+47))+@log(@sin(@sqrt(x(3)-x(4)-47)))*(-x(3)))+(-(x(5)+47)*@sin(@sqrt(x(5)+x(4)/2+47))+@log(@sin(@sqrt(x(4)-x(5)-47)))*(-x(4)));
+@For(Par: @BND(-512,x,512));

@@ -1,0 +1,17 @@
+!Lingo Code - (Case-?);
+Sets:
+	!Set the numbers of independent variables
+    !for example:
+	!Par/1..2/:x;
+	
+EndSets
+
+!Your objective function
+!min = ?
+!e.g. min = -@log(x(1)-x(2)*@log(@cos(-2/3*x(1)^3-8*x(1)^2)))-@log(33*x(1)-x(1)*x(2)+5-((x(1)-4)^2+(x(2)-5)^2-4)^2);
+
+
+!The lower bound and upper bound for each independent variable. Using 'For' when every variable has the same domain
+!For example
+!@For(Par: @BND(-100,x,100));
+

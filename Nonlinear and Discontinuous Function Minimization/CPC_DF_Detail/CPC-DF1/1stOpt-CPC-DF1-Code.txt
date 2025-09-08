@@ -1,0 +1,7 @@
+NewCodeBlock "Case-1";
+Hardness = 2;
+Algorithm = DE1;
+MultiRun = 10;
+ConstStr f1=x-0.125,f2=y+0.25;
+ParameterDomain = [-100,100];
+MinFunction (sin(f1+f2)+ln((f1-f2)^2-1.5*f1+2.5*f2+1))^0.6+sqrt(sin(f1^2+f2^2));

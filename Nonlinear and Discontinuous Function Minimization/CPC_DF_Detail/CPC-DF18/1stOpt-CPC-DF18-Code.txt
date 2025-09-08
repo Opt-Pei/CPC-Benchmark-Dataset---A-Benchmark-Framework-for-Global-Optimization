@@ -1,0 +1,12 @@
+NewCodeBlock "Case-18";
+Hardness = 2; //1,2,...5
+Algorithm = DE1;//SM2;
+MultiRun = 10;
+StartRange = [-50,50];
+ParameterDomain = [-5000,5000];
+ConstStr
+f1=2*x1-(x2-x3+x4)^(10.3-x1),
+f2=2-ln(-2*x3-x4-2*x2)-(-x2*ln(x1-exp(x1/x2-x3/x4)))^0.75,
+f3=0.0463*x3-(x1^2/x2)*(2/ln(x3+x4-x2-x1)),
+f4=0.651-((x4*x2^5)/x3)*(x4*x1-2/ln(x3+x4-x2-x1))^0.5;
+MinFunction Sum(i=1:4)(f[i]^(2+i/100));

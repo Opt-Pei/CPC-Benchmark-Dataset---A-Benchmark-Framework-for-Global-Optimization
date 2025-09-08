@@ -1,0 +1,6 @@
+!Lingo Code - (Case-23);
+Sets:
+    Par/1..5/:x;
+EndSets
+min = -20*@exp(0-0.2*@sqrt(1/5*((x(1)^2/1-x(2)^1)+x(2)^2/2-x(3)^2+x(3)^2/3-x(4)^3+x(4)^2/4-x(5)^4)))-@log(1/5*((@sin(@sqrt(@cos(1*x(1))-@sin(1*x(2)))))+@sin(@sqrt(@cos(2*x(2))-@sin(2*x(3))))+@sin(@sqrt(@cos(3*x(3))-@sin(3*x(4))))+@sin(@sqrt(@cos(4*x(4))-@sin(4*x(5))))));
+@For(Par: @BND(-50,x,50));

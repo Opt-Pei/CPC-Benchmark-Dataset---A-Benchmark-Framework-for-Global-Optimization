@@ -1,0 +1,115 @@
+format long g;
+
+% Test Function 5
+function fval = obj_function(x)
+   sqrtbase1 = 5.*(power(x(5),2))-(power(((power(x(5),2.))/5-10.*cos(2.*pi.*5.*x(5))),(5./5)));
+   if sqrtbase1 < 0
+      fval = 1e100;
+      return;
+   end
+
+   powbase1 = ((power(x(4),2.))/4-10.*cos(2.*pi.*4.*x(4)));
+   if powbase1 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase2 = 4.*(power(x(4),2))-(power(powbase1,(4./5)));
+   if sqrtbase2 < 0
+      fval = 1e100;
+      return;
+   end
+
+   powbase2 = ((power(x(3),2.))/3-10.*cos(2.*pi.*3.*x(3)));
+   if powbase2 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase3 = 3.*(power(x(3),2))-(power(powbase2,(3./5)));
+   if sqrtbase3 < 0
+      fval = 1e100;
+      return;
+   end
+
+   powbase3 = ((power(x(2),2.))/2-10.*cos(2.*pi.*2.*x(2)));
+   if powbase3 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase4 = 2.*(power(x(2),2))-(power(powbase3,(2./5)));
+   if sqrtbase4 < 0
+      fval = 1e100;
+      return;
+   end
+
+   powbase4 = ((power(x(1),2.))/1-10.*cos(2.*pi.*1.*x(1)));
+   if powbase4 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase5 = 1.*(power(x(1),2))-(power(powbase4,(1./5)));
+   if sqrtbase5 < 0
+      fval = 1e100;
+      return;
+   end
+
+   logbase1 = 5-((sqrt(1.*(power(x(1),2))-(power(powbase4,(1./5)))))+sqrt(2.*(power(x(2),2))-(power(powbase3,(2./5))))+sqrt(3.*(power(x(3),2))-(power(powbase2,(3./5))))+sqrt(4.*(power(x(4),2))-(power(powbase1,(4./5))))+sqrt(sqrtbase1))+1;
+   if logbase1 <= 0
+      fval = 1e100;
+      return;
+   end
+
+   fval = -log(logbase1);
+end
+
+lb = [-6,-6,-6,-6,-6];
+ub = [6,6,6,6,6];
+PopSz = 2000;
+ParamNo = 5;
+
+
+
+%% GA executive code
+numRuns = 20;
+
+% Initialize arrays to store results
+results_fval = zeros(numRuns, 1);        % Store objective function values of each run
+results_xOpt = zeros(numRuns, ParamNo);  % Store optimized variable values of each run
+
+% Set random seed (ensure different initial populations for each run)
+rng('shuffle');
+
+options = optimoptions('ga', 'PopulationSize', PopSz, 'MaxGenerations', 2E3, 'Display', 'Iter');
+best = 1E+100;
+
+% Perform multiple GA optimizations
+for i = 1:numRuns
+    fprintf('Run #%d...\n', i);
+    
+    % Run GA
+    [xOpt, fval] = ga(@obj_function, ParamNo, [], [], [], [], lb, ub, [], [], options);
+
+    % Store results
+    results_fval(i) = fval;
+    results_xOpt(i, :) = xOpt;
+    if best > fval
+        best = fval;
+        best_xOpt = xOpt;
+    end
+    % Print current run results
+    fprintf('Run %d: Objective Function (Min.): %f\n', i, fval);
+    fprintf('Optimized variable values: %s\n', mat2str(xOpt));
+end
+
+disp(best);
+disp(best_xOpt);
+
+% Output all results
+disp('Objective function values of all runs:');
+disp(results_fval);
+
+disp('Optimized variable values of all runs:');
+disp(results_xOpt);

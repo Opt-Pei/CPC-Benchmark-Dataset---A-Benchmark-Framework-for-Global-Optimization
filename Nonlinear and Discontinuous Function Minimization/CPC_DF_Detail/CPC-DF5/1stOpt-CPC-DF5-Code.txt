@@ -1,0 +1,7 @@
+NewCodeBlock "Case-5";
+Constant n=5, A=10;
+Hardness = 2;
+Algorithm = SM2;//DE1;
+MultiRun = 10;
+Parameter x(n)=[-6,6];
+MinFunction -ln(n-Sum(i=1:n)(sqrt(i*x[i]^2-(x[i]^2/i-A*cos(2*pi*i*x[i]))^(i/n)))+1);

@@ -1,0 +1,6 @@
+!Lingo Code - (Case-10);
+Sets:
+    Par/1..2/:x;
+EndSets
+min = (x(1)^2+x(2)^2/x(1)-5)^0.01+25*((@sin(x(1)+1))^2-(@sin(x(2)-1))^2)^0.25;
+@For(Par: @BND(-5,x,5));

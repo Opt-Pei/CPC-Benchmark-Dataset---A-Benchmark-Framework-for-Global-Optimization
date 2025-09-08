@@ -1,0 +1,6 @@
+NewCodeBlock "Case-17";
+Hardness = 2; //1,2,...5
+Algorithm = DE1;//SM2;//[50];
+MultiRun = 10;
+ParameterDomain = [-100,100];
+MinFunction 1-ln((x1^2-x2^2+0.25)^0.5-(0.3*cos(3*pi*x1-x2+1)*cos(4*pi*x2+2*x1-1)-0.29)^0.5);

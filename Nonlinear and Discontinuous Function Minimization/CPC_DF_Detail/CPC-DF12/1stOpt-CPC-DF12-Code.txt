@@ -1,0 +1,7 @@
+NewCodeBlock  "Case-12";
+Constant n=5;
+Algorithm = DE1;//SM2;
+MultiRun = 10;
+Hardness = 2; //1,2,...5
+Parameter x(n) = [-100,100];
+MinFunction -Sum(i=1:n-1)(sqrt(sin(sqrt(x[i+1]^2-x[i]^2)-0.5)-0.5)/(10*(x[i+1]^2+x[i]^2)-0.85)^0.2+0.5);

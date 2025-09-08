@@ -1,0 +1,5 @@
+NewCodeBlock "Case-24";
+Hardness = 2; //1,2,...5
+MultiRun = 10;
+ParameterDomain = [-100,100];
+MinFunction  1+ln(2*(sin(sqrt(100-x1^2-x2^2)))^0.25-1)/(1+0.001*(x1^2+x2^2-5)^0.25)^2;

@@ -1,0 +1,6 @@
+!Lingo Code - (Case-24);
+Sets:
+    Par/1..2/:x;
+EndSets
+min = 1+@log(2*(@sin(@sqrt(100-x(1)^2-x(2)^2)))^0.25-1)/(1+0.001*(x(1)^2+x(2)^2-5)^0.25)^2;
+@For(Par: @BND(-100,x,100));

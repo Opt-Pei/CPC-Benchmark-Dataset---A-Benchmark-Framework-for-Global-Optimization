@@ -1,0 +1,154 @@
+format long g;
+global lb ub;
+
+% Test Function 12
+function fval = obj_function(x)
+   powbase1 = (10.*((power(x(5),2))+(power(x(4),2)))-0.85);
+   if powbase1 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase1 = (power(x(5),2))-(power(x(4),2));
+   if sqrtbase1 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase2 = sin(sqrt(sqrtbase1)-0.5)-0.5;
+   if sqrtbase2 < 0
+      fval = 1e100;
+      return;
+   end
+
+   powbase2 = (10.*((power(x(4),2))+(power(x(3),2)))-0.85);
+   if powbase2 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase3 = (power(x(4),2))-(power(x(3),2));
+   if sqrtbase3 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase4 = sin(sqrt(sqrtbase3)-0.5)-0.5;
+   if sqrtbase4 < 0
+      fval = 1e100;
+      return;
+   end
+
+   powbase3 = (10.*((power(x(3),2))+(power(x(2),2)))-0.85);
+   if powbase3 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase5 = (power(x(3),2))-(power(x(2),2));
+   if sqrtbase5 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase6 = sin(sqrt(sqrtbase5)-0.5)-0.5;
+   if sqrtbase6 < 0
+      fval = 1e100;
+      return;
+   end
+
+   powbase4 = (10.*((power(x(2),2))+(power(x(1),2)))-0.85);
+   if powbase4 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase7 = (power(x(2),2))-(power(x(1),2));
+   if sqrtbase7 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase8 = sin(sqrt(sqrtbase7)-0.5)-0.5;
+   if sqrtbase8 < 0
+      fval = 1e100;
+      return;
+   end
+
+   fval = -((sqrt(sqrtbase8)./(power(powbase4,0.2))+0.5)+sqrt(sqrtbase6)./(power(powbase3,0.2))+0.5+...
+sqrt(sqrtbase4)./(power(powbase2,0.2))+0.5+sqrt(sqrtbase2)./(power(powbase1,0.2))+0.5);
+end
+lb = [-100,-100,-100,-100,-100];
+ub = [100,100,100,100,100];
+PopSz = 2000;
+ParamNo = 5;
+
+
+
+
+
+
+
+%% BFGS executive code
+numRuns = 20;
+numStarts = 20;   % Number of starting points for MultiStart
+
+results_fval = zeros(numRuns, 1);        % Store objective function values
+results_xOpt = zeros(numRuns, ParamNo);  % Store optimized variable values
+
+best_fval = inf;
+
+%% Constrained objective function with penalty
+function fval = constrained_obj_function(x)
+    global lb ub;
+    penalty = sum(max(0, x - ub).^2 + max(0, lb - x).^2) * 1e+100; % Penalty term
+    fval = obj_function(x) + penalty; % Add penalty to the objective function
+end
+
+%% Optimization settings for fminunc
+options = optimoptions('fminunc', ...
+    'Algorithm', 'quasi-newton', ...
+    'Display', 'off', ...
+    'MaxIterations', 2000);
+
+%% MultiStart controller
+ms = MultiStart('UseParallel', false, 'Display', 'iter');
+
+for i = 1:numRuns
+    fprintf('Run #%d MultiStart Optimization...\n', i);
+
+    % Define optimization problem
+    problem = createOptimProblem('fminunc', ...
+        'objective', @constrained_obj_function, ...
+        'x0', lb + (ub - lb) .* rand(1, ParamNo), ...
+        'lb', lb, ...
+        'ub', ub, ...
+        'options', options);
+
+    % Run MultiStart
+    [xOpt, fval, exitflag] = run(ms, problem, numStarts);
+
+    results_fval(i) = fval;
+    results_xOpt(i, :) = xOpt;
+
+    % Update best solution
+    if fval < best_fval
+        best_fval = fval;
+        best_xOpt = xOpt;
+    end
+
+    % Print current run result
+    fprintf('Run %d: Best objective value = %f\n', i, fval);
+    fprintf('Optimized variables: %s\n', mat2str(xOpt));
+end
+
+% Print final best result
+fprintf('\nFinal best objective value: %.16f\n', best_fval);
+fprintf('Corresponding optimized variables: %s\n', mat2str(best_xOpt));
+
+% Print results of all runs
+disp('Objective values of all runs:');
+disp(results_fval);
+
+disp('Optimized variables of all runs:');
+disp(results_xOpt);

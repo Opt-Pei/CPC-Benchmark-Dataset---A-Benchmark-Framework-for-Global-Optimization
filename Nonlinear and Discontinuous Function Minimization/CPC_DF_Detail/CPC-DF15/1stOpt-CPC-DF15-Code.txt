@@ -1,0 +1,6 @@
+NewCodeBlock "Case-15";
+Hardness = 2; //1,2,...5
+Algorithm = SM2;
+MultiRun = 10;
+ParameterDomain = [-5,5];
+MinFunction (10-(0.01-sqrt(cos(12*sqrt(x^y-y^x)+5)-x/y))^(1.35)+(0.5*(x^2-y^2)*cos(x-y)+2)^1.5);

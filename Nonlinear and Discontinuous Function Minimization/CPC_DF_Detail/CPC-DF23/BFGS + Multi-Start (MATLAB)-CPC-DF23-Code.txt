@@ -1,0 +1,115 @@
+format long g;
+global lb ub;
+% Test Function 23
+function fval = obj_function(x)
+   sqrtbase1 = cos(4.*x(4))-sin(4.*x(5));
+   if sqrtbase1 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase2 = cos(3.*x(3))-sin(3.*x(4));
+   if sqrtbase2 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase3 = cos(2.*x(2))-sin(2.*x(3));
+   if sqrtbase3 < 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase4 = cos(1.*x(1))-sin(1.*x(2));
+   if sqrtbase4 < 0
+      fval = 1e100;
+      return;
+   end
+
+   logbase1 = 1./5.*((sin(sqrt(sqrtbase4)))+sin(sqrt(sqrtbase3))+sin(sqrt(sqrtbase2))+sin(sqrt(sqrtbase1)));
+   if logbase1 <= 0
+      fval = 1e100;
+      return;
+   end
+
+   sqrtbase5 = 1./5.*(((power(x(1),2.))/1-(power(x(2),1)))+(power(x(2),2.))/2-(power(x(3),2))+(power(x(3),2.))/3-(power(x(4),3))+(power(x(4),2.))/4-(power(x(5),4)));
+   if sqrtbase5 < 0
+      fval = 1e100;
+      return;
+   end
+
+   fval = -20.*exp(0-0.2.*sqrt(sqrtbase5))-log(logbase1);
+end
+lb = [-50,-50,-50,-50,-50];
+ub = [50,50,50,50,50];
+PopSz = 2000;
+ParamNo = 5;
+
+
+
+
+
+
+%% BFGS executive code
+numRuns = 20;
+numStarts = 20;   % Number of starting points for MultiStart
+
+results_fval = zeros(numRuns, 1);        % Store objective function values
+results_xOpt = zeros(numRuns, ParamNo);  % Store optimized variable values
+
+best_fval = inf;
+
+%% Constrained objective function with penalty
+function fval = constrained_obj_function(x)
+    global lb ub;
+    penalty = sum(max(0, x - ub).^2 + max(0, lb - x).^2) * 1e+100; % Penalty term
+    fval = obj_function(x) + penalty; % Add penalty to the objective function
+end
+
+%% Optimization settings for fminunc
+options = optimoptions('fminunc', ...
+    'Algorithm', 'quasi-newton', ...
+    'Display', 'off', ...
+    'MaxIterations', 2000);
+
+%% MultiStart controller
+ms = MultiStart('UseParallel', false, 'Display', 'iter');
+
+for i = 1:numRuns
+    fprintf('Run #%d MultiStart Optimization...\n', i);
+
+    % Define optimization problem
+    problem = createOptimProblem('fminunc', ...
+        'objective', @constrained_obj_function, ...
+        'x0', lb + (ub - lb) .* rand(1, ParamNo), ...
+        'lb', lb, ...
+        'ub', ub, ...
+        'options', options);
+
+    % Run MultiStart
+    [xOpt, fval, exitflag] = run(ms, problem, numStarts);
+
+    results_fval(i) = fval;
+    results_xOpt(i, :) = xOpt;
+
+    % Update best solution
+    if fval < best_fval
+        best_fval = fval;
+        best_xOpt = xOpt;
+    end
+
+    % Print current run result
+    fprintf('Run %d: Best objective value = %f\n', i, fval);
+    fprintf('Optimized variables: %s\n', mat2str(xOpt));
+end
+
+% Print final best result
+fprintf('\nFinal best objective value: %.16f\n', best_fval);
+fprintf('Corresponding optimized variables: %s\n', mat2str(best_xOpt));
+
+% Print results of all runs
+disp('Objective values of all runs:');
+disp(results_fval);
+
+disp('Optimized variables of all runs:');
+disp(results_xOpt);

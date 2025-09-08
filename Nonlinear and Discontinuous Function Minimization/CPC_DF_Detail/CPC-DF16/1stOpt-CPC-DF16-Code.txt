@@ -1,0 +1,7 @@
+NewCodeBlock "Case-16";
+Hardness = 2; //1,2,...5
+Algorithm = SM2;
+MultiRun = 10;
+Constant n = 5, c = 27;  //47
+Parameters x(1:n)=[-512,512];
+MinFunction (sum(i=1:n-1)((-(i*x[i+1]+c)*sin(sqrt((x[i+1]-x[i]/2+c)))+sin(sqrt((x[i]-i*x[i+1]-c)))*(-x[i]))^i/(2*1E+7)));

@@ -1,0 +1,6 @@
+!Lingo Code - (Case-11);
+Sets:
+    Par/1..2/:x;
+EndSets
+min = @cos(x(1))*(@abs(@sin(x(2)))-8.0*@abs(@cos(x(1)/(x(2)^2+1))))^(1+@sqrt(0.001-@abs(@sin(x(1)*x(2)))));
+@For(Par: @BND(-6,x,6));

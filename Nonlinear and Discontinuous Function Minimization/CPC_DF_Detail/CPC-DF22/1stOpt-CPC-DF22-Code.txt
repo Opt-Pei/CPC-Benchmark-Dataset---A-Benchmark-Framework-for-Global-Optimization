@@ -1,0 +1,7 @@
+NewCodeBlock "Case-22";
+Hardness = 2;
+MultiRun = 10;
+ParameterDomain = [-100,100];
+ConstStr f1=x*y-(1/y-cos(-x+y)/x)^(x-y)-0.01*x,
+         f2=(-x-y)^(x/y)-(1/x-x*ln(x+sin(y*x)*y))+0.02*y;
+MinFunction f1^1.01+f2^1.01;

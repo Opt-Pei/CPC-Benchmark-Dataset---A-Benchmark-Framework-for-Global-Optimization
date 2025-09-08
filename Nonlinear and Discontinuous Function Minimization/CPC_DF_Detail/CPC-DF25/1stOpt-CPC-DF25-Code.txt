@@ -1,0 +1,6 @@
+NewCodeBlock "Case-25";
+Constant n=3;
+Algorithm = SM2[150,55];
+MultiRun = 10;
+ParameterDomain = [-10,10];
+MinFunction -Sum(i=1:n-1)((ln(sqrt(sin(x[i]-pi/2)+cos(x[i+1]-pi))+0.25*x[i]+1))/(sqrt(ln(sin(x[i]*pi)-(cos(2*x[i]-x[i+1]+pi/2)-x[i]/i)))+0.1));

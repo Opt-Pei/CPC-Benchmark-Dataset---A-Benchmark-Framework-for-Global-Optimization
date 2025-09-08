@@ -1,0 +1,5 @@
+NewCodeBlock "Case-13";
+Algorithm = SM2;
+MultiRun = 10;
+ParameterDomain = [-100,100];
+MinFunction sqrt(x1-2*x2^2-exp(x2-x1^2))-(0.5*cos(3*pi*x1+4*pi*x2+5)-0.495*x1)^0.2;
