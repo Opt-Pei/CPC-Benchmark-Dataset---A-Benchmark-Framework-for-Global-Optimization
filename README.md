@@ -41,7 +41,11 @@ Universial Global Optimization - 1stOpt
 
 These can be used as starting points for running multiple benchmark problems. However, there might be better ways to solve the same problems depending on the chosen method and software platform. The implementations provided here are intended only as references, users are encouraged to adapt or improve them according to their specific requirements.
 
+These template scripts can be found in "General-purpose computation scripts" folder
+
 **Problem-specific scripts**, provided in the corresponding folders of each benchmark problem, which directly implement the formulation and computation of that specific problem.
+
+Problem-specific script for each problem can be found in folder such as "01-CPC-DF1", "11-CPC-DF11". 
 
 **General function code**, written in a platform-independent form, so that users working with other optimization platforms can easily adapt the problems to their own environments.
 
