@@ -1,12 +1,17 @@
 # CPC-Framework
 
-**CPC (Challenging Problems for Computation)** is a framework providing a collection of challenging optimization problems for benchmarking global optimization algorithms.
+**CPC (Challenging Problems for Computation)** is a framework providing a collection of challenging optimization problems for benchmarking global optimization algorithms in relatively low-dimensional spaces.
 
 ## Authors
 
-- Peicong Cheng, Institute of Science Tokyo
-- Makoto Yamashita, Institute of Science Tokyo
+- Peicong Cheng*, Institute of Science Tokyo
+	Email: cheng.p.b2bf@m.isct.ac.jp
+	
+- Makoto Yamashita, Institute of Science Tokyo, Professor
+	Email: Makoto.Yamashita@c.titech.ac.jp
+	Home Page Link:http://www.opt.c.titech.ac.jp/yamashita/
 
+*: Corresponding author
 
 ## License
 
@@ -22,6 +27,8 @@ A formal citation will be provided upon publication.
 ## Description
 
 This repository contains the implementation of the CPC benchmark, initially introduced with 25 discontinuous and nonlinear function minimization problems. These problems are designed to test algorithmic performance under conditions of discontinuity, nonlinearity, and sensitivity to numerical precision. Detailed descriptions of each function can be found in the overview PDF file located in the corresponding problem folder.
+
+Update: 38 nonlinear curve fitting problems have been published. 
 
 To further facilitate practical use, we also provide general-purpose implmentation codes. These include:
 
@@ -50,6 +57,22 @@ Problem-specific script for each problem can be found in folder such as "01-CPC-
 **General function code**, written in a platform-independent form, so that users working with other optimization platforms can easily adapt the problems to their own environments.
 
 Future extensions of CPC will include additional discontinuous and nonlinear minimization problems, as well as other categories such as equation solving, curve fitting, and black-box optimization. Each problem includes detailed data and the currently known best solutions to facilitate systematic evaluation and fair comparison of optimization algorithms.
+
+Moreover, the benchmark problems presented in this framework were formulated with the support of several professional mathematical optimization tools, including MATLAB, LINGO, etc.
+
+While these tools played an important role in problem construction and validation, all reported global optima were ultimately obtained using 1stOpt, whose capabilities in nonlinear global optimzation proved particularly effective across the entire benchmark set.
+
+We gratefully acknowledge the contributions of all software platforms involved in this process, and the relevant links are as follow. 
+
+Relevant links:
+
+1stOpt: http://www.7d-soft.com/en/
+
+MATLAB: https://www.mathworks.com/products/matlab.html
+
+LINGO: https://www.lindo.com/
+
+PlatEMO: https://github.com/BIMK/PlatEMO
 
 ## Usage Suggestions
 
