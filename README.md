@@ -17,7 +17,7 @@
 
 The CPC benchmark is licensed under **CC BY 4.0**. Users are free to use, modify, and distribute the benchmark, including for commercial purposes, **provided that the original paper is properly cited**:
 
-The CPC Framework is currently under development.
+CPC benchmark has been launched with a substantial set of optimization problems already available, and will continue to be expanded with additional instances over time.
 If you use this benchmark set, please cite it as:
 
 Peicong Cheng, Makoto Yamashita, “CPC Benchmark Dataset – A Benchmark Dataset for Global Optimization”, August 2025, GitHub Repository: github.com/Opt-Pei/CPC-Benchmark-Dataset.
@@ -64,7 +64,7 @@ While these tools played an important role in problem construction and validatio
 
 We gratefully acknowledge the contributions of all software platforms involved in this process, and the relevant links are as follow. 
 
-Relevant links:
+Useful links:
 
 1stOpt: http://www.7d-soft.com/en/
 
