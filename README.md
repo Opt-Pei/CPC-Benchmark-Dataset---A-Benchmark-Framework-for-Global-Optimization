@@ -1,6 +1,6 @@
-# CPC-Framework
+# CPC-Benchmark Dataset
 
-**CPC (Challenging Problems for Computation)** is a framework providing a collection of challenging optimization problems for benchmarking global optimization algorithms in relatively low-dimensional spaces.
+**CPC (Challenging Problems for Computation)** is a benchmark dataset providing a collection of challenging optimization problems for benchmarking global optimization algorithms in relatively low-dimensional spaces.
 
 ## Authors
 
@@ -20,7 +20,7 @@ The CPC benchmark is licensed under **CC BY 4.0**. Users are free to use, modify
 The CPC Framework is currently under development.
 If you use this benchmark set, please cite it as:
 
-Peicong Cheng, Makoto Yamashita, “CPC Framework – A Benchmark Framework for Global Optimization”, August 2025, GitHub Repository: github.com/Opt-Pei/CPC-framework.
+Peicong Cheng, Makoto Yamashita, “CPC Benchmark Dataset – A Benchmark Dataset for Global Optimization”, August 2025, GitHub Repository: github.com/Opt-Pei/CPC-framework.
 
 A formal citation will be provided upon publication.
 
