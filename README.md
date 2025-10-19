@@ -4,14 +4,14 @@
 
 ## Authors
 
-- Peicong Cheng*, Institute of Science Tokyo.  
+- Peicong Cheng\*, Institute of Science Tokyo.  
 	Email: cheng.p.b2bf@m.isct.ac.jp
 	
 - Makoto Yamashita, Institute of Science Tokyo, Professor.  
 	Email: Makoto.Yamashita@c.titech.ac.jp  
 	Home Page Link:http://www.opt.c.titech.ac.jp/yamashita/
 
-- * Corresponding author
+- \* Corresponding author
 
 ## License
 
