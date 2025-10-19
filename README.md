@@ -11,7 +11,7 @@
 	Email: Makoto.Yamashita@c.titech.ac.jp  
 	Home Page Link:http://www.opt.c.titech.ac.jp/yamashita/
 
- * Corresponding author
+- * Corresponding author
 
 ## License
 
